@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 
-public class GetAllBooksTest extends SpecBooksTest{
+public class GetAllBooksTest extends BooksSpecs{
 
         @Test
         @Tag("G1")
@@ -69,5 +69,3 @@ public class GetAllBooksTest extends SpecBooksTest{
                     .spec(responseSpecForBooks200);
         }
 }
-
-

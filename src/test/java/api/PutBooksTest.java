@@ -1,6 +1,5 @@
 package api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -12,17 +11,7 @@ import static org.hamcrest.Matchers.*;
 
 import java.util.Map;
 
-public class PutBooksTest extends SpecBooksTest {
-
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    private static Book defaultBook() {
-        return new Book(1, "Book 1", "Foo bar", 100, "Foo bar", "2026-06-28");
-    }
-
-    private static Map<String, Object> defaultPayload() {
-        return MAPPER.convertValue(defaultBook(), Map.class);
-    }
+public class PutBooksTest extends BooksSpecs {
 
     @Test
     @Tag("U1")
@@ -129,7 +118,6 @@ public class PutBooksTest extends SpecBooksTest {
                 .when()
                 .put("/{id}", bookId)
                 .then()
-                .spec(responseSpecForBook200)
                 .statusCode(400);
     }
 
@@ -228,8 +216,8 @@ public class PutBooksTest extends SpecBooksTest {
     @ParameterizedTest
     @ValueSource(ints = {-2147483648, -1, 0, 1, 200, 201, 2147483647})
     @Tag("U12")
-    @DisplayName("PUT /Books{id} with null publishDate returns 400")
-    void givenNullPublishDate_whenPostBooks_thenReturn400(int bookId) {
+    @DisplayName("PUT /Books/{id} with null publishDate returns 400")
+    void givenNullPublishDate_whenPutBooks_thenReturn400(int bookId) {
 
         Map<String, Object> payload = defaultPayload();
         payload.put("publishDate", null);
@@ -248,8 +236,8 @@ public class PutBooksTest extends SpecBooksTest {
     @ParameterizedTest
     @ValueSource(ints = {-2147483648, -1, 0, 1, 200, 201, 2147483647})
     @Tag("U13")
-    @DisplayName("PUT /Books{id} with invalid publishDate returns 400")
-    void givenInvalidPublishDate_whenPostBooks_thenReturn400(int bookId) {
+    @DisplayName("PUT /Books/{id} with invalid publishDate returns 400")
+    void givenInvalidPublishDate_whenPutBooks_thenReturn400(int bookId) {
 
         Map<String, Object> payload = defaultPayload();
         payload.put("publishDate", "22/06/2025");

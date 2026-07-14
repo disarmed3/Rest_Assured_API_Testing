@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class GetOneBookTest extends SpecBooksTest{
+public class GetOneBookTest extends BooksSpecs{
 
         @ParameterizedTest
         @ValueSource(ints = {1, 100, 200})
@@ -89,7 +89,7 @@ public class GetOneBookTest extends SpecBooksTest{
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1", "100", "200"})
+        @ValueSource(strings = {"01", " 1", "1 "})
         @Tag("G3.6")
         @DisplayName("GET /Books/{id} with quoted numeric valid IDs returns 200 and valid schema")
         void givenQuotedNumericIds_whenGetOneBook_thenReturn200andValidSchema(String bookId) {

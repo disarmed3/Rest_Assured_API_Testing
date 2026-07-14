@@ -5,21 +5,11 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
 
-public class PostBooksTest extends SpecBooksTest{
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    private static Book defaultBook() {
-        return new Book(1, "Book 1", "Foo bar", 100, "Foo bar", "2026-06-28");
-    }
-
-    private static Map<String, Object> defaultPayload() {
-        return MAPPER.convertValue(defaultBook(), Map.class);
-    }
+public class PostBooksTest extends BooksSpecs{
 
     @Test
     @Tag("P1")
